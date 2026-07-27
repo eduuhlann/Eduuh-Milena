@@ -1,4 +1,105 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ========== INTERACTIVE GRID ==========
+  const canvas = document.getElementById('gridCanvas');
+  const ctx = canvas.getContext('2d');
+  let cols, rows, points = [];
+  const spacing = 40;
+  let mouse = { x: -1000, y: -1000 };
+  let dpr = window.devicePixelRatio || 1;
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(window.innerWidth / spacing) + 1;
+    rows = Math.ceil(window.innerHeight / spacing) + 1;
+    points = [];
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        points.push({
+          ox: x * spacing,
+          oy: y * spacing,
+          x: x * spacing,
+          y: y * spacing,
+          vx: 0,
+          vy: 0
+        });
+      }
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  function onPointerMove(px, py) {
+    mouse.x = px;
+    mouse.y = py;
+  }
+
+  window.addEventListener('mousemove', (e) => onPointerMove(e.clientX, e.clientY));
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    onPointerMove(t.clientX, t.clientY);
+  }, { passive: true });
+  window.addEventListener('touchend', () => {
+    mouse.x = -1000;
+    mouse.y = -1000;
+  });
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      const dx = mouse.x - p.ox;
+      const dy = mouse.y - p.oy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const radius = 150;
+
+      if (dist < radius) {
+        const force = (1 - dist / radius) * 30;
+        const angle = Math.atan2(dy, dx);
+        p.vx += Math.cos(angle + Math.PI) * force * 0.1;
+        p.vy += Math.sin(angle + Math.PI) * force * 0.1;
+      }
+
+      p.vx += (p.ox - p.x) * 0.08;
+      p.vy += (p.oy - p.y) * 0.08;
+      p.vx *= 0.85;
+      p.vy *= 0.85;
+      p.x += p.vx;
+      p.y += p.vy;
+    }
+
+    ctx.strokeStyle = 'rgba(255, 106, 0, 0.12)';
+    ctx.lineWidth = 0.5;
+
+    for (let y = 0; y < rows; y++) {
+      ctx.beginPath();
+      for (let x = 0; x < cols; x++) {
+        const p = points[y * cols + x];
+        if (x === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.stroke();
+    }
+
+    for (let x = 0; x < cols; x++) {
+      ctx.beginPath();
+      for (let y = 0; y < rows; y++) {
+        const p = points[y * cols + x];
+        if (y === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(drawGrid);
+  }
+
+  drawGrid();
   const memories = document.querySelectorAll('.memory');
 
   // Intersection Observer for memory animations
