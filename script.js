@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       p.y += p.vy;
     }
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
     ctx.lineWidth = 0.5;
 
     for (let y = 0; y < rows; y++) {
