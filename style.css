@@ -612,46 +612,58 @@ body {
   transform: scale(1.1);
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIVE MOBILE ========== */
 
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 0.15rem;
   }
 
+  .counter {
+    font-size: 0.85rem;
+    padding: 0 1rem;
+  }
+
+  .counter span {
+    font-size: 0.95rem;
+  }
+
   .profiles {
-    gap: 1.5rem;
+    gap: 1rem;
+    padding: 2rem 1rem;
   }
 
   .profile-avatar {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
 
   .profile-name {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 
+  /* Timeline mobile */
   .timeline {
     max-width: 100%;
-    padding: 3rem 1rem 4rem;
+    padding: 2rem 0.5rem 3rem;
   }
 
   .timeline-track {
-    left: 16px;
+    left: 20px;
   }
 
   .memory {
-    padding-left: 44px !important;
-    padding-right: 0 !important;
+    padding-left: 48px !important;
+    padding-right: 8px !important;
     flex-direction: column !important;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 3rem;
     transform: translateY(30px);
   }
 
@@ -660,24 +672,155 @@ body {
   }
 
   .memory::after {
-    left: 16px;
-    top: 24px;
+    left: 20px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
     transform: translate(-50%, 0);
   }
 
   .memory-img img {
-    width: 160px;
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 4 / 3;
   }
 
   .memory-info {
     padding-left: 0 !important;
   }
 
-  .footer h2 {
+  .memory-info h3 {
+    font-size: 1.15rem;
+  }
+
+  .memory-desc {
+    font-size: 0.78rem;
+  }
+
+  /* Carousel mobile */
+  .carousel-section {
+    padding: 2rem 1rem;
+  }
+
+  .carousel-title {
     font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .carousel {
+    gap: 0.5rem;
+  }
+
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .carousel-track-container {
+    max-width: 100%;
+  }
+
+  .carousel-track img {
+    border-radius: 8px;
+  }
+
+  /* Music player mobile */
+  .music-player {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    border-radius: 14px;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .music-disc {
+    width: 42px;
+    height: 42px;
+  }
+
+  .disc-inner {
+    width: 14px;
+    height: 14px;
+  }
+
+  .music-controls {
+    min-width: 0;
+    flex: 1;
+    gap: 4px;
+  }
+
+  .music-title {
+    font-size: 0.72rem;
+  }
+
+  .music-artist {
+    font-size: 0.6rem;
+  }
+
+  .music-bar {
+    height: 3px;
+  }
+
+  .music-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .music-btn-small {
+    width: 24px;
+    height: 24px;
+    font-size: 0.5rem;
+  }
+
+  /* Footer mobile */
+  .footer {
+    padding: 4rem 1.5rem;
+  }
+
+  .footer h2 {
+    font-size: 1.3rem;
+  }
+
+  .footer-msg {
+    font-size: 0.85rem;
   }
 
   .te-amo {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+  }
+
+  .heart-big {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+  }
+
+  .profile-avatar {
+    width: 75px;
+    height: 75px;
+  }
+
+  .memory-img img {
+    max-width: 220px;
+  }
+
+  .memory-info h3 {
+    font-size: 1rem;
+  }
+
+  .music-title {
+    font-size: 0.65rem;
   }
 }
